@@ -4,6 +4,16 @@ import EditCalendar from './EditCalendar';
 import Calendar from './Calendar';
 
 class App extends Component {
+  constructor (props) {
+    super(props);
+    this.state= {
+      data: {
+        maskedValue: '',
+        checkboxValue: '',
+        textAreaValue: '',
+      }
+    }
+  }
   render() {
     return (
       <div className="App">

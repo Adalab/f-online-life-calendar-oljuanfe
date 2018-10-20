@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import MaskedInput from 'react-maskedinput'
 
 class EditCalendar extends Component {
   render() {
     return (
       <div className="edit-wrapper">
         <label htmlFor="date">Fecha</label>
-        <input type="text" name="date" id="date"/>
+        < MaskedInput
+          className=''
+          id="date"
+          name="date"
+          value="date"
+          // onChange={}
+          mask={"11/11/1111"}
+          placeholder="dd/mm/aaaa"
+        />
         <p>Estado</p>
         <label htmlFor="happy">
           <input type="checkbox" name="happy" id="happy" value="happy"/>

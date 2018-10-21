@@ -6,6 +6,9 @@ class EditCalendar extends Component {
   render() {
     const {
       handleClickSave,
+      handleClickCheckbox,
+      handleChangeTextArea,
+      handleMaskedInput,
     } = this.props;
     return (
       <div className="edit-wrapper">
@@ -14,8 +17,8 @@ class EditCalendar extends Component {
           className=''
           id="date"
           name="date"
-          value="date"
-          // onChange={}
+          value=""
+          onChange={handleMaskedInput}
           mask={"11/11/1111"}
           placeholder="dd/mm/aaaa"
         />
@@ -26,6 +29,7 @@ class EditCalendar extends Component {
             name="happy" 
             id="happy" 
             value="happy"
+            onClick={handleClickCheckbox}
           />
           :)
         </label>
@@ -35,13 +39,15 @@ class EditCalendar extends Component {
             name="sad" 
             id="sad" 
             value="sad"
+            onClick={handleClickCheckbox}
           />
           :(
         </label>
         <label htmlFor="message">Mensaje</label>
         <textarea 
           name="message" 
-          id="message" 
+          id="message"
+          onChange={handleChangeTextArea}
           cols="30" 
           rows="1"
         >

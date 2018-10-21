@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import EditCalendar from './EditCalendar';
 import Calendar from './Calendar';
+import CalendarDetail from './CalendarDetail';
 
 class App extends Component {
   constructor (props) {
@@ -19,6 +20,10 @@ class App extends Component {
     this.handleMaskedInput = this.handleMaskedInput.bind(this);
     this.handleClickCheckbox = this.handleClickCheckbox.bind(this);
     this.handleChangeTextArea = this.handleChangeTextArea.bind(this);
+  }
+
+  componentDidUpdate () {
+    localStorage.setItem('data', JSON.stringify(this.state.data));
   }
 
   handleClickSave (event) {
@@ -69,6 +74,7 @@ class App extends Component {
 
   render() {
     console.log('state',this.state);
+    console.log('local', localStorage);
     return (
       <div className="App">
         <Switch>
@@ -93,6 +99,17 @@ class App extends Component {
                             handleChangeTextArea = {this.handleChangeTextArea}
                             handleMaskedInput = {this.handleMaskedInput}
                           />
+            }
+          />
+          <Route
+            exact
+            path='/:id'
+            render={
+              (props) => (
+                  <CalendarDetail 
+                  match={props.match}
+                  data={this.state.data}/>
+              )
             }
           />
         </Switch>

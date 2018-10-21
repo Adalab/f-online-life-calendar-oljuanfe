@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import EditCalendar from './EditCalendar';
 import { Link } from 'react-router-dom';
-import { happy } from '../images/happy.png';
-import { sad } from '../images/sad.png';
-import { image} from './happy.png';
 
 
 class Calendar extends Component {
@@ -26,16 +22,16 @@ class Calendar extends Component {
             data.map((dayData,index) => {
               console.log('daydata',dayData);
               return (
-                <li key={index}>
+                <Link to={`/${index}`} key={index}>
+                  <li key={index}>
                   <img src={require(`../images/${dayData.checkboxValue}.png`)} alt={dayData.checkboxValue}/>
                 </li>
+                </Link>
+                
               );
             })
           }
         </ul>
-        
-
-        Componente calendario
       </div>
     );
   }

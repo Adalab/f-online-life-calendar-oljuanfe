@@ -13,9 +13,14 @@ class EditCalendar extends Component {
     } = this.props;
     return (
       <div className="edit-wrapper">
-        <label htmlFor="date">Fecha</label>
+        <label 
+          htmlFor="date"
+          className="date-label"
+        >
+          Fecha
+        </label>
         < MaskedInput
-          className=''
+          className='masked-input'
           id="date"
           name="date"
           value=""
@@ -23,29 +28,38 @@ class EditCalendar extends Component {
           mask={"11/11/1111"}
           placeholder="dd/mm/aaaa"
         />
-        <p>Estado</p>
-        <label htmlFor="happy">
-          <input 
-            type="checkbox" 
-            name="happy" 
-            id="happy" 
-            value="happy"
-            onClick={handleClickCheckbox}
-          />
-          :)
+        <p className="mood-title">Estado</p>
+        <div className="mood-wrapper">         
+          <label htmlFor="happy" className="checkbox-label">
+            <input 
+              type="checkbox" 
+              name="happy" 
+              id="happy" 
+              value="happy"
+              onClick={handleClickCheckbox}
+            />
+            :)
+          </label>
+          <label htmlFor="sad" className="checkbox-label">
+            <input 
+              type="checkbox" 
+              name="sad" 
+              id="sad" 
+              value="sad"
+              onClick={handleClickCheckbox}
+            />
+            :(
+          </label>
+        </div>
+        
+        <label 
+          htmlFor="message" 
+          className="textarea-label"
+        >
+          Mensaje
         </label>
-        <label htmlFor="sad">
-          <input 
-            type="checkbox" 
-            name="sad" 
-            id="sad" 
-            value="sad"
-            onClick={handleClickCheckbox}
-          />
-          :(
-        </label>
-        <label htmlFor="message">Mensaje</label>
         <textarea 
+          className="textarea-input"
           name="message" 
           id="message"
           onChange={handleChangeTextArea}
@@ -53,13 +67,25 @@ class EditCalendar extends Component {
           rows="1"
         >
         </textarea>
-        <Link to={'/'} className="link-router">
-          <button onClick={handleClickSave}>
+        <Link 
+          to={'/'}
+          className="link-router"
+        >
+          <button 
+            onClick={handleClickSave}
+            className="save-button button"
+          >
             Guardar
           </button>
         </Link>
-        <Link to={'/'} className="link-router">
-          <button onClick={handleClickCancel}>
+        <Link 
+          to={'/'} 
+          className="link-router"
+        >
+          <button 
+            onClick={handleClickCancel}
+            className="cancel-button button"
+          >
             Cancelar
           </button>
         </Link>

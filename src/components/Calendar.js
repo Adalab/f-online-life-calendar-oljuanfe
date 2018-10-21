@@ -7,27 +7,26 @@ class Calendar extends Component {
     const {
       data,
     } = this.props;
-    console.log('data', data);
     return (
       <div className="Calendar">
-        <Link to={'/edit/'} className="link-router">
-          <button>
+        <Link to={'/edit/'} className="add-button">
+          <button className="add-button">
             +
           </button>
         </Link>
-        <img src={require('../images/happy.png')} alt="happy"/>
-        <img src={require('../images/sad.png')} alt="sad"/>
-        <ul>
+        <ul className="calendar-list">
           {
             data.map((dayData,index) => {
-              console.log('daydata',dayData);
               return (
-                <Link to={`/${index}`} key={index}>
+                <Link 
+                  to={`/${index}`} 
+                  key={index}
+                  className="calendar-day"
+                >
                   <li key={index}>
                   <img src={require(`../images/${dayData.checkboxValue}.png`)} alt={dayData.checkboxValue}/>
                 </li>
                 </Link>
-                
               );
             })
           }

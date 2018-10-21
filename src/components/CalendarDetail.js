@@ -26,7 +26,6 @@ class CalendarDetail extends Component {
             Volver
           </button>
         </Link>
-        <img src={detailInfo !== undefined ?require('../images/happy.png') : ''} alt="happy"/>
         <div>
           <img 
             src={

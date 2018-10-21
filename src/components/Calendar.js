@@ -7,6 +7,7 @@ class Calendar extends Component {
     const {
       data,
     } = this.props;
+    console.log(data);
     return (
       <div className="Calendar">
         <Link to={'/edit/'} className="add-button">
@@ -15,8 +16,8 @@ class Calendar extends Component {
           </button>
         </Link>
         <ul className="calendar-list">
-          {
-            data.map((dayData,index) => {
+          {data.length !== 0
+            ?(data.map((dayData,index) => {
               return (
                 <Link 
                   to={`/${index}`} 
@@ -28,7 +29,8 @@ class Calendar extends Component {
                 </li>
                 </Link>
               );
-            })
+            }))
+            :'Dale al botón +'
           }
         </ul>
       </div>

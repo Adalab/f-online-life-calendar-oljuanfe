@@ -13,7 +13,8 @@ class App extends Component {
         maskedValue: '',
         checkboxValue: '',
         textAreaValue: '',
-      }
+      },
+      dataStoraged: [],
     }
     this.handleClickSave = this.handleClickSave.bind(this);
     this.handleClickCancel = this.handleClickCancel.bind(this);
@@ -22,19 +23,38 @@ class App extends Component {
     this.handleChangeTextArea = this.handleChangeTextArea.bind(this);
   }
 
-  componentDidUpdate () {
-    localStorage.setItem('data', JSON.stringify(this.state.data));
+  componentDidMount () {
+    let dataFromStorage ;
+    if (localStorage.length !==0 && localStorage!== '[]'){
+      dataFromStorage = JSON.parse(localStorage.getItem('data'));
+      this.setState({dataStoraged: dataFromStorage});
+    }
+    console.log('retrieve', dataFromStorage);
+    console.log(localStorage);
+
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem('data', JSON.stringify(this.state.dataStoraged));
+    console.log(localStorage);
   }
 
   handleClickSave (event) {
     console.log('clickando');
     console.log(this.state.editorData);
     this.setState(
-      {data: [...this.state.data,this.state.editorData]},
+      {
+        data: [...this.state.data,this.state.editorData],
+        dataStoraged: [...this.state.dataStoraged,this.state.editorData]
+      },
       this.setState(
         {editorData: {}}
-      )
+      ),
     );
+
+    localStorage.setItem('data', JSON.stringify(this.state.dataStoraged));
+    console.log('state in save', this.state);
+    console.log('storage in save', localStorage);
   }
 
   handleClickCancel (event) {
@@ -49,7 +69,7 @@ class App extends Component {
     console.log('value', valueMasked);
     this.setState(
       {editorData:{...this.state.editorData,maskedValue: valueMasked}}
-    );
+    )
   }
 
   handleClickCheckbox (event) {
@@ -83,7 +103,7 @@ class App extends Component {
             path='/'
             render={
               (props) => (
-                  <Calendar data={this.state.data}/>
+                  <Calendar data={this.state.dataStoraged}/>
               )
             }
           />
@@ -108,7 +128,7 @@ class App extends Component {
               (props) => (
                   <CalendarDetail 
                   match={props.match}
-                  data={this.state.data}/>
+                  data={this.state.dataStoraged}/>
               )
             }
           />

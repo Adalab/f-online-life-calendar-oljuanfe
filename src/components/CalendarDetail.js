@@ -41,6 +41,11 @@ class CalendarDetail extends Component {
                 ?detailInfo.maskedValue 
                 : ''
             }
+            title={
+              detailInfo !== undefined 
+                ?detailInfo.maskedValue 
+                : ''
+            }
           />
           <p>
             {detailInfo !== undefined 

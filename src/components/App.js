@@ -7,14 +7,30 @@ class App extends Component {
   constructor (props) {
     super(props);
     this.state= {
-      data: {
-        maskedValue: '',
-        checkboxValue: '',
-        textAreaValue: '',
-      }
+      data: [
+        {
+          maskedValue: '',
+          checkboxValue: '',
+          textAreaValue: '',
+        }
+      ]
     }
+    this.handleClickSave = this.handleClickSave.bind(this);
   }
+
+  handleClickSave (event) {
+    console.log('clickando');
+    let dataLastIndex = this.state.data.length - 1; 
+    console.log('lastindex', dataLastIndex);
+    this.setState(
+      {
+        ...this.state.data,data:{}
+      }
+    )
+  }
+
   render() {
+    console.log('state',this.state);
     return (
       <div className="App">
         <Switch>
@@ -23,7 +39,7 @@ class App extends Component {
             path='/'
             render={
               (props) => (
-                  <Calendar/>
+                  <Calendar data="data"/>
               )
             }
           />
@@ -31,7 +47,10 @@ class App extends Component {
             exact
             path='/edit/'
             render={
-              (props) => <EditCalendar/>
+              (props) => <EditCalendar 
+                            data="data"
+                            handleClickSave = {this.handleClickSave}
+                          />
             }
           />
         </Switch>

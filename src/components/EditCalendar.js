@@ -9,6 +9,7 @@ class EditCalendar extends Component {
       handleClickCheckbox,
       handleChangeTextArea,
       handleMaskedInput,
+      handleClickCancel,
     } = this.props;
     return (
       <div className="edit-wrapper">
@@ -58,7 +59,7 @@ class EditCalendar extends Component {
           </button>
         </Link>
         <Link to={'/'} className="link-router">
-          <button>
+          <button onClick={handleClickCancel}>
             Cancelar
           </button>
         </Link>

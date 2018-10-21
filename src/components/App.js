@@ -7,13 +7,7 @@ class App extends Component {
   constructor (props) {
     super(props);
     this.state= {
-      data: [
-        {
-          maskedValue: '',
-          checkboxValue: '',
-          textAreaValue: '',
-        }
-      ],
+      data: [],
       editorData : {
         maskedValue: '',
         checkboxValue: '',
@@ -21,6 +15,7 @@ class App extends Component {
       }
     }
     this.handleClickSave = this.handleClickSave.bind(this);
+    this.handleClickCancel = this.handleClickCancel.bind(this);
     this.handleMaskedInput = this.handleMaskedInput.bind(this);
     this.handleClickCheckbox = this.handleClickCheckbox.bind(this);
     this.handleChangeTextArea = this.handleChangeTextArea.bind(this);
@@ -30,15 +25,17 @@ class App extends Component {
     console.log('clickando');
     console.log(this.state.editorData);
     this.setState(
-      {data: [...this.state.data,this.state.editorData]}
+      {data: [...this.state.data,this.state.editorData]},
+      this.setState(
+        {editorData: {}}
+      )
     );
-    // let dataLastIndex = this.state.data.length - 1; 
-    // console.log('lastindex', dataLastIndex);
-    // this.setState(
-    //   { 
-    //     data: this.state.data.push(this.state.editorData)
-    //   }
-    // );
+  }
+
+  handleClickCancel (event) {
+    this.setState(
+      {editorData: {}}
+    );
   }
 
   handleMaskedInput (event) {
@@ -55,10 +52,11 @@ class App extends Component {
     console.log(event.target.value);
     console.log(event.target.checked);
     let valueCheckbox = event.target.value;
-    this.setState(
-      {editorData: {...this.state.editorData, checkboxValue: valueCheckbox}}
-    );
-
+    if (event.target.checked === true) {
+      this.setState(
+        {editorData: {...this.state.editorData, checkboxValue: valueCheckbox}}
+      );
+    }
   }
 
   handleChangeTextArea (event) {
@@ -79,7 +77,7 @@ class App extends Component {
             path='/'
             render={
               (props) => (
-                  <Calendar data="data"/>
+                  <Calendar data={this.state.data}/>
               )
             }
           />
@@ -88,8 +86,9 @@ class App extends Component {
             path='/edit/'
             render={
               (props) => <EditCalendar 
-                            data="data"
+                            data={this.state.data}
                             handleClickSave = {this.handleClickSave}
+                            handleClickCancel = {this.handleClickCancel}
                             handleClickCheckbox = {this.handleClickCheckbox}
                             handleChangeTextArea = {this.handleChangeTextArea}
                             handleMaskedInput = {this.handleMaskedInput}
